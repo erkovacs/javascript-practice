@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <title>World's most complicated add function in JS</title>
+</head>
+<body id="demo">
+    A: <input type="number" id="a">
+    B: <input type="number" id="b">
+    Result = <input type="number" readonly="readonly" id="result">
+    <button id="add">Add</button>
+<script src="./add.js"></script>
+<script>
+document.getElementById('add').onclick = ()=>{
+    let a = parseInt(document.getElementById('a').value);
+    let b = parseInt(document.getElementById('b').value);
+
+    add(a, b).then((response)=>{
+        let result = Array.from(response.getElementsByTagName("AddResult"))[0].innerHTML;
+        document.getElementById('result').value = result;
+    }).catch((error)=>alert(error.status + " " + error.statusText));
+}
+</script>
+</body>
+</html>
