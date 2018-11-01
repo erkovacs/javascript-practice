@@ -1,5 +1,80 @@
 const server = require("express")();
+const cookieParser = require("cookie-parser");
 
+const HTTP = {
+  OPTIONS: "OPTIONS",
+  GET: "GET",
+  POST: "POST",
+  PUT: "PUT",
+  PATCH: "PATCH",
+  DELETE: "DELETE"
+};
+
+const cors = (req, res, next) => {
+  let headers = [];
+  let code = 200;
+  if (req.method === HTTP.GET) {
+    headers = [
+      ...headers,
+      {
+        "Access-Control-Allow-Origin": "http://arunranga.com"
+      },
+
+      {
+        "Access-Control-Allow-Credentials": " true"
+      },
+      {
+        "Cache-Control": " no-cache"
+      },
+      {
+        Pragma: " no-cache"
+      },
+      {
+        "Content-Type": " text/plain"
+      }
+    ];
+
+    if (typeof req.cookies.pageAccess === "undefined") {
+      res.cookie("pageAccess", "1", { maxAge: 10800 });
+    } else {
+      let accesses = req.cookies.pageAccess;
+      res.cookie("pageAccess", ++accesses, { maxAge: 10800 });
+    }
+  } else if (req.method === HTTP.OPTIONS) {
+    headers = [
+      ...headers,
+      {
+        "Access-Control-Allow-Origin": "http://arunranga.com"
+      },
+      {
+        "Access-Control-Allow-Methods": "GET, OPTIONS"
+      },
+      {
+        "Access-Control-Allow-Credentials": "true"
+      },
+      {
+        "Access-Control-Max-Age": "1728000"
+      },
+      {
+        "Content-Length": "0"
+      },
+      {
+        "Content-Type": "text/plain"
+      }
+    ];
+    code = 403;
+  } else {
+    headers = [...headers, { "Content-Type": "text/plain" }];
+    code = 400;
+    res.cookie("pageAccess", "-1", { maxAge: -1 });
+  }
+  headers.forEach(header => res.header(header));
+  res.status(code);
+  next();
+};
+
+server.use(cookieParser());
+server.use(cors);
 /**
  * 
  * if($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -45,7 +120,7 @@ const server = require("express")();
 
 server.get("/", (req, res) => {
   res.end("");
-  console.log(req);
+  //console.log(req);
 });
 
 const running = server.listen(process.env.PORT || 8080, () => {
