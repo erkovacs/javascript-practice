@@ -30,19 +30,15 @@
         this.render('error', {code: statusCode});
     }
 
-    router.index = function(props){
+    router.index = router.home = function(props){
         this.render('home', props);
     }
     
-    router.aboutUs = function(props){
+    router.gameInProgress = function(props){
         this.render('aboutUs', props);
     }
 
-    router.home = function(props){
-        this.index(props);
-    }
-
-    router.contact = function(props){
+    router.gameEnded = function(props){
         this.render('contact', props);
     }
 
