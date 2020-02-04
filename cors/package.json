@@ -1,0 +1,27 @@
+{
+  "name": "cors",
+  "version": "1.0.0",
+  "description": "CORS implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codepadawan93/javascript-practice.git"
+  },
+  "keywords": [
+    "cors",
+    "nodejs"
+  ],
+  "author": "kovaroberik@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codepadawan93/javascript-practice/issues"
+  },
+  "homepage": "https://github.com/codepadawan93/javascript-practice#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4"
+  }
+}
