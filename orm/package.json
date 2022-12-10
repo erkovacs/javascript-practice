@@ -24,7 +24,7 @@
   "homepage": "https://github.com/codepadawan93/you-choose#readme",
   "dependencies": {
     "dotenv": "^6.1.0",
-    "express": "^4.16.4"
+    "express": "^4.17.3"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"
